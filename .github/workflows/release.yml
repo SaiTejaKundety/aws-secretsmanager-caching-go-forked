@@ -52,15 +52,7 @@ jobs:
       - name: Test
         run: go test -v ./secretcache
 
-      - name: Tag release
-        run: |
-          tag="v${{ github.event.inputs.version }}"
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git tag -a "$tag" -m "Release $tag"
-          git push origin "$tag"
-
-      - name: Create GitHub Release with auto-generated notes
+      - name: Tag and create GitHub Release
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
